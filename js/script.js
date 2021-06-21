@@ -97,19 +97,65 @@ const icons = [
     },
   ];
 
-print(icons);
+
   
+
+const coloredArray = icons.map((element) => {
+    let color = 'purple';
+      if(element.type == 'animal'){
+        color = 'blue';
+      } else if (element.type == 'vegetable'){
+        color = 'orange';
+      }
+    return {
+        ... element,
+        color
+    }
+});
+
+print(coloredArray);
+
+const types = [];
+
+coloredArray.forEach((element) =>{
+  if(!types.includes(element.type)){
+    types.push(element.type);
+    document.getElementById('type').innerHTML += 
+    `
+    <option value ="${element.type}"> ${element.type} </option>
+    `
+  }
+});
+
+const select = document.getElementById('type');
+
+select.addEventListener("change", function(){
+  const valoreSelect = select.value;
+  const filteredIcons = coloredArray.filter((element) => {
+    return element.type == valoreSelect;
+  })
+  printIcons(filteredIcons);
+if(valoreSelect == 'All'){
+  printIcons(filteredIcons);
+}
+});
+
+
 /*----- funzioni ---- */
- function print(array){
+function printIcons(array){
+  document.getElementById('icons').innerHTML = '';
+} 
+
+function print(array){
 
   array.forEach((element) => {
     console.log(element);
 
-    const {name, prefix, family} = element;
+    const {color, name, prefix, family} = element;
 
     const elementHTML = `
     <div>
-      <i class="${family} ${prefix}${name}"></i>
+      <i class=" ${family} ${prefix}${name}" style="color: ${color}" ></i>
       <div class="title">${name.toUpperCase()}</div>
     </div>
     `;
