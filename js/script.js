@@ -113,7 +113,7 @@ const coloredArray = icons.map((element) => {
     }
 });
 
-print(coloredArray);
+printIcons(coloredArray);
 
 const types = [];
 
@@ -131,22 +131,23 @@ const select = document.getElementById('type');
 
 select.addEventListener("change", function(){
   const valoreSelect = select.value;
+  console.log(valoreSelect);
   const filteredIcons = coloredArray.filter((element) => {
     return element.type == valoreSelect;
-  })
-  printIcons(filteredIcons);
-if(valoreSelect == 'All'){
-  printIcons(filteredIcons);
-}
-});
+  });
 
+  printIcons(filteredIcons);
+    if(valoreSelect == 'All'){
+      printIcons(coloredArray);
+    }
+})
 
 /*----- funzioni ---- */
-function printIcons(array){
-  document.getElementById('icons').innerHTML = '';
-} 
 
-function print(array){
+
+function printIcons(array){
+
+  document.getElementById('icons').innerHTML = '';
 
   array.forEach((element) => {
     console.log(element);
